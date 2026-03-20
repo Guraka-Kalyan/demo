@@ -3,7 +3,14 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(cors());
+// Allow all origins explicitly
+const corsOptions = {
+  origin: '*',
+  methods: ['GET'],
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
 
 const jokes = [
   "Why don't scientists trust atoms? Because they make up everything!",
@@ -17,6 +24,11 @@ const jokes = [
   "What do you call a fish with no eyes? A fsh!",
   "Why did the bicycle fall over? Because it was two-tired!"
 ];
+
+// Health check route
+app.get('/', (req, res) => {
+  res.json({ status: 'ok', message: 'Joke API is live!' });
+});
 
 app.get('/joke', (req, res) => {
   const randomIndex = Math.floor(Math.random() * jokes.length);
