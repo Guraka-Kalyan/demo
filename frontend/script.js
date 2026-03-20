@@ -1,7 +1,8 @@
 const getJokeBtn = document.getElementById('getJokeBtn');
 const jokeDisplay = document.getElementById('jokeDisplay');
 
-const API_URL = 'http://localhost:3000'; // Change this for deployment
+// Uses environment variable for production, defaults to localhost for development
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
 async function fetchJoke() {
   getJokeBtn.disabled = true;
