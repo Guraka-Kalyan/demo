@@ -2,7 +2,8 @@ const getJokeBtn = document.getElementById('getJokeBtn');
 const jokeDisplay = document.getElementById('jokeDisplay');
 
 // Uses environment variable for production, defaults to localhost for development
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+// .replace ensures no double-slash if env var has a trailing slash
+const API_URL = (import.meta.env.VITE_API_URL || 'http://localhost:3000').replace(/\/+$/, '');
 
 async function fetchJoke() {
   getJokeBtn.disabled = true;
